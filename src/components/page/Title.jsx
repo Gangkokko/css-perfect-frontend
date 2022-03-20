@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { Button } from 'nes-react';
+
 const Title = () => {
   return (
     <div className='bg-yellow-400'>
@@ -8,6 +11,11 @@ const Title = () => {
             <br />
             完全に理解した
           </h1>
+        </div>
+        <div>
+          <Link to='/stages'>
+            <Button error>ステージ選択</Button>
+          </Link>
         </div>
       </div>
     </div>

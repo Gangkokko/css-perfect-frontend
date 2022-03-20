@@ -7,6 +7,8 @@ import SignIn from './components/page/SignIn';
 import SignUp from './components/page/SignUp';
 import Header from './components/utils/Header';
 import DrfApiFetch from './components/DrfApiFetch';
+import Stage from './components/page/Stage';
+import Problem from './components/page/Problem';
 
 export const AuthContext = createContext();
 
@@ -18,17 +20,13 @@ const App = () => {
   const handleGetCurrentUser = async () => {
     try {
       const res = await getCurrentUser();
-      console.log(res);
 
       if (res?.status === 200) {
         setIsSignedIn(true);
         setCurrentUser(res?.data.currentUser);
       } else {
-        console.log('No current user');
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
 
     setLoading(false);
   };
@@ -54,6 +52,8 @@ const App = () => {
           <Route path='/' element={<Title />} />
           <Route path='/register' element={<SignUp />} />
           <Route path='/login' element={<SignIn />} />
+          <Route path='/stages' element={<Stage />} />
+          <Route path='/problem' element={<Problem />} />
         </Routes>
       </Router>
     </AuthContext.Provider>

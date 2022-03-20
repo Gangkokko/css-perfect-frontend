@@ -1,50 +1,36 @@
-import { useState } from 'react';
-
-const QuestionLists = [
-  {
-    Question: '1.早稲田出身の選手は?',
-    Answers: ['大迫傑選手', '服部勇馬選手', '中村匠吾選手', '相澤晃選手'],
-    Correct: '大迫傑選手',
-    selectedAnswer: '',
-  },
-  {
-    Question: '2.東洋出身の選手は?',
-    Answers: ['大迫傑選手', '服部勇馬選手', '中村匠吾選手', '相澤晃選手'],
-    Correct: '服部勇馬選手',
-    selectedAnswer: '',
-  },
-  {
-    Question: '3.駒澤出身の選手は?',
-    Answers: ['大迫傑選手', '服部勇馬選手', '中村匠吾選手', '相澤晃選手'],
-    Correct: '中村匠吾選手',
-    selectedAnswer: '',
-  },
-];
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import client from '../../lib/api/client';
+import { Button } from 'nes-react';
 
 const Stage = () => {
-  const [qLIsts, setqLists] = useState(QuestionLists);
-  const inputAnswer = (selectedAnswer, targetIndex) => {
-    setqLists(qLIsts.map((list, index) => (index === targetIndex ? { ...list, selectedAnswer } : list)));
-  };
+  const [stages, setStages] = useState([]);
+
+  useEffect(() => {
+    client.get('/stages').then((res) => {
+      setStages(res.data.data);
+    });
+  }, []);
   return (
-    <div>
-      {qLIsts.map(({ Question, Answers, Correct, selectedAnswer }, index) => {
-        return (
-          <div key={Question}>
-            <h1>{Question}</h1>
-            <div>
-              {Answers.map((answer) => {
-                return (
-                  <button key={answer} onClick={() => inputAnswer(answer, index)}>
-                    {answer}
-                  </button>
-                );
-              })}
+    <div className='bg-yellow-400 h-screen'>
+      <div className='grid md:grid-cols-2 xl:grid-cols-4 gap-4 mx-auto container px-5'>
+        {stages.map((data) => (
+          <div className='hover:bg-gray-700 delay-50 duration-100 bg-gray-800 p-5 rounded-lg group' key={data.id}>
+            <div className='h-80'>
+              <img src={data.image.url} className='w-full rounded shadow object-cover h-full' alt='ステージ画像' />
             </div>
-            {selectedAnswer && <div>{Correct === selectedAnswer ? '正解' : '不正解'}</div>}
+            <Link to='/problem'>
+              <h3 className='text-gray-200 font-bold mt-5'>{data.name}</h3>
+            </Link>
+            <p className='text-gray-400 font-light mt-2 text-xs'>{data.description}</p>
           </div>
-        );
-      })}
+        ))}
+        <div>
+          <Link to='/'>
+            <Button primary>タイトルへ戻る</Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
