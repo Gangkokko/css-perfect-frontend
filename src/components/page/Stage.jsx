@@ -13,18 +13,20 @@ const Stage = () => {
   }, []);
   return (
     <div className='bg-yellow-400 h-screen'>
-      <div className='grid md:grid-cols-2 xl:grid-cols-4 gap-4 mx-auto container px-5'>
-        {stages.map((data) => (
-          <div className='hover:bg-gray-700 delay-50 duration-100 bg-gray-800 p-5 rounded-lg group' key={data.id}>
-            <div className='h-80'>
-              <img src={data.image.url} className='w-full rounded shadow object-cover h-full' alt='ステージ画像' />
+      <div className='container mx-auto'>
+        <div className='grid md:grid-cols-2 xl:grid-cols-4 gap-4 mx-auto px-5 mb-8'>
+          {stages.map((data) => (
+            <div className='hover:bg-gray-700 delay-50 duration-100 bg-gray-800 p-5 rounded-lg group' key={data.id}>
+              <Link to='/problem'>
+                <div className='h-80'>
+                  <img src={data.image.url} className='w-full rounded shadow object-cover h-full' alt='ステージ画像' />
+                </div>
+                <h3 className='text-gray-200 font-bold mt-5'>{data.name}</h3>
+                <p className='text-gray-400 font-light mt-2 text-xs'>{data.description}</p>
+              </Link>
             </div>
-            <Link to='/problem'>
-              <h3 className='text-gray-200 font-bold mt-5'>{data.name}</h3>
-            </Link>
-            <p className='text-gray-400 font-light mt-2 text-xs'>{data.description}</p>
-          </div>
-        ))}
+          ))}
+        </div>
         <div>
           <Link to='/'>
             <Button primary>タイトルへ戻る</Button>
