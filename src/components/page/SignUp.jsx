@@ -53,7 +53,7 @@ export const SignUp = () => {
       } else {
       }
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
   return (
@@ -73,7 +73,7 @@ export const SignUp = () => {
         </div>
         <div className='mb-8'>
           <label htmlFor='password' className='text-sm block'>
-            パスワード
+            パスワード(6文字以上)
           </label>
           <input type='password' id='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)} className='w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50' placeholder='パスワード' required />
         </div>

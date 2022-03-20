@@ -44,7 +44,7 @@ const SignIn = () => {
         navigate('/');
       }
     } catch (e) {
-      console.log(e);
+      alert(e);
     }
   };
   return (

@@ -8,7 +8,7 @@ const options = {
 
 const client = applyCaseMiddleware(
   axios.create({
-    baseURL: 'http://localhost:3001/api/v1',
+    baseURL: 'http://18.181.191.133:3001/api/v1',
     responseType: 'json',
     headers: {
       'Content-Type': 'application/json',
